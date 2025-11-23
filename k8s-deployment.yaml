@@ -14,10 +14,12 @@ spec:
       labels:
         app: firstdemoproject
     spec:
+      imagePullSecrets:
+      - name: ghcr-secret
       containers:
       - name: firstdemoproject
-        image: firstdemoproject:latest
-        imagePullPolicy: Never
+        image: ghcr.io/uqurtosun/firstdemoproject:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
           name: http

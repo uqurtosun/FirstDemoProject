@@ -1,0 +1,24 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: first-demo-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "configmaps"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: first-demo-rolebinding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: first-demo-sa
+  namespace: default
+roleRef:
+  kind: Role
+  name: first-demo-role
+  apiGroup: rbac.authorization.k8s.io
+

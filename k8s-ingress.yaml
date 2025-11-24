@@ -3,23 +3,22 @@ kind: Ingress
 metadata:
   name: firstdemoproject-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: nginx
-  rules:
-  - host: demokub.vupiy.co.uk
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: firstdemoproject-service
-            port:
-              number: 80
   tls:
-  - hosts:
-    - demokub.vupiy.co.uk
-    secretName: firstdemoproject-tls
-
+    - hosts:
+        - demokub.vupiy.co.uk
+      secretName: firstdemoproject-tls
+  rules:
+    - host: demokub.vupiy.co.uk
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: firstdemoproject-service
+                port:

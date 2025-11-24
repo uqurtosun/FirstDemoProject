@@ -22,3 +22,4 @@ spec:
               service:
                 name: firstdemoproject-service
                 port:
+                  number: 80
